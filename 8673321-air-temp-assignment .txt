@@ -1,0 +1,25 @@
+PROGRAM convert_temperature
+    implicit none
+    integer :: i, n
+    real :: celsius, kelvin
+    character(len=50) :: infile, outfile
+    parameter(infile='Air-Temperature.csv')
+    parameter(outfile='8673321-Air-Temperature-Assignment.csv')
+    ! Open input file
+    open(unit=10, file=infile, status='old')
+    ! Open output file
+    open(unit=20, file=outfile, status='replace')
+    ! Read the number of temperature values in the file
+    read(10, *) n
+    ! Write the header to the output file
+    write(20, *) 'Celsius, Kelvin'
+    ! Loop over the temperature values and convert them to Kelvin
+    do i = 1, n
+        read(10, *) celsius
+        kelvin = celsius + 273.15
+        write(20, *) celsius, kelvin
+    end do
+    ! Close input and output files
+    close(10)
+    close(20)
+END PROGRAM convert_temperature
